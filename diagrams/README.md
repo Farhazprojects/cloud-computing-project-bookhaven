@@ -13,7 +13,7 @@ assessment without needing a Figma account.
 
 **Status:** placeholder — to be added.
 
-**Figma file:** `<add the shared Figma link here>`
+**Figma file:** `https://www.figma.com/board/IdgZQlzcqfqZntz5PJtZpy`
 
 Once exported, the diagram will be displayed here:
 
