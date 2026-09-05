@@ -60,7 +60,7 @@ bookhaven/
 The architecture diagram is maintained in Figma and exported into
 [`diagrams/`](diagrams/) for assessment submission.
 
-**Figma file:** `<add the shared Figma link here>`
+**Figma file:** `https://www.figma.com/board/IdgZQlzcqfqZntz5PJtZpy`
 
 Exported images must be committed to the repository so the diagram is available
 without a Figma account. See [`diagrams/README.md`](diagrams/README.md) for
