@@ -1,4 +1,4 @@
-# BookHaven
+# Cloud Computing Project — BookHaven
 
 A team project for the design of a highly available, secure and cost-aware cloud
 architecture for an online bookshop.
@@ -6,6 +6,14 @@ architecture for an online bookshop.
 This repository holds the **documentation and collaboration files** for the
 project. No application code, deployment scripts or infrastructure-as-code has
 been added at this stage.
+
+**Unit:** COIT20260 Cloud Computing and Internet of Things for Smart Applications
+**Institution:** CQUniversity, Sydney
+**Team project:** BookHaven cloud architecture design
+
+Unit background, the IaaS and PaaS reasoning behind the tier choices, and the
+ethical and sustainability considerations carried forward from earlier work in
+the unit are recorded in [`docs/unit-context.md`](docs/unit-context.md).
 
 ---
 
@@ -43,7 +51,9 @@ bookhaven/
 ├── docs/
 │   ├── architecture.md              The agreed architecture, explained
 │   ├── requirements-mapping.md      Architecture mapped to assessment criteria
-│   └── team-workflow.md             How the remote team coordinates
+│   ├── team-workflow.md             How the remote team coordinates
+│   ├── unit-context.md              Unit details and background from the unit
+│   └── references.md                Harvard reference list for cited sources
 ├── diagrams/
 │   └── README.md                    Where exported Figma diagrams are stored
 └── .github/
@@ -87,7 +97,9 @@ documentation or the diagram.
 | **Secrets Manager** | Secure storage and retrieval of database credentials and other secrets. |
 | **CloudWatch** | Metrics, logs and alarms; the source of the scaling signals used by EC2 Auto Scaling. |
 
-Full detail is in [`docs/architecture.md`](docs/architecture.md).
+Full detail is in [`docs/architecture.md`](docs/architecture.md). The reasoning
+behind using EC2 (closer to IaaS) for the application tier and managed RDS for
+the database tier is explained in [`docs/unit-context.md`](docs/unit-context.md).
 
 ---
 
@@ -169,3 +181,5 @@ every change has been seen by at least two people.
   repository is documentation only until the design is agreed.
 - **Documentation and diagram must agree.** If one changes, the other changes in
   the same pull request.
+- **Sources are cited in Harvard (CQUniversity) author–date style**, and listed
+  in [`docs/references.md`](docs/references.md).
