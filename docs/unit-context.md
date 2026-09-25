@@ -29,8 +29,34 @@ architecture design on AWS.
 
 | Stage | Focus | Relationship to BookHaven |
 |---|---|---|
-| Earlier individual work | Comparing cloud providers, IaaS and PaaS service models, deploying a simple web application, ethical and DEI considerations | Provides the service-model vocabulary and the ethical framing used here |
-| **BookHaven (this repository)** | Designing a highly available, secure and cost-aware AWS architecture for an online bookshop | Current work |
+| **Assessment 1** (individual) | Comparing cloud service providers; IaaS and PaaS service models; deploying a simple web application to a managed platform; ethical and DEI considerations | Provides the service-model vocabulary and the ethical framing used here |
+| **Assessment 2** (group — this repository) | Designing and deploying a scalable, load-balanced and secure AWS hosting architecture for BookHaven | Current work |
+
+### Assessment 1 — what it covered
+
+Assessment 1 was an individual report comparing two cloud service providers that
+offer both **Infrastructure as a Service (IaaS)** and **Platform as a Service
+(PaaS)**. One provider was selected for closer investigation, its IaaS and PaaS
+services were described and demonstrated, it was compared with AWS, and a simple
+web application was deployed to a managed platform. The report closed with
+diversity, equity and inclusion (DEI) considerations in cloud computing.
+
+Three things from that work carry directly into BookHaven: the **IaaS/PaaS
+distinction** used in Section 3 below to justify the tier choices, the
+**provider comparison** that supports building on AWS, and the **ethical and
+sustainability framing** in Section 5.
+
+### Assessment 2 — what this repository documents
+
+Assessment 2 is the group project. BookHaven is an online bookstore whose
+existing application ran on a **single on-premises server** and became slow or
+unavailable during Black Friday and Boxing Day peaks. The project migrates
+hosting to AWS and replaces the single-server dependency with a distributed,
+load-balanced, multi-AZ architecture.
+
+The design was built and tested as a proof of concept in the ap-southeast-2
+(Sydney) Region. See [`architecture.md`](architecture.md) and
+[`implementation-evidence.md`](implementation-evidence.md).
 
 ---
 
@@ -64,8 +90,8 @@ preferred where the team gains nothing from managing the layer itself.
 
 ## 4. Provider comparison background
 
-Earlier work in the unit compared cloud providers at a general level. Two points
-from that comparison are directly relevant to BookHaven:
+Assessment 1 compared cloud providers at a general level. Two points from that
+comparison are directly relevant to BookHaven:
 
 - **AWS offers a broad range of mature enterprise services**, and is well suited
   to enterprise workloads and infrastructure flexibility. This supports the
@@ -73,26 +99,30 @@ from that comparison are directly relevant to BookHaven:
 - **AWS Auto Scaling adjusts EC2 instance counts in response to demand**, which
   is the mechanism BookHaven relies on for scalability.
 
-> **Scope note.** The earlier comparison referred to services from other
-> providers, and to AWS services outside BookHaven's agreed list, purely for
-> comparison. Those services are **not** part of the BookHaven architecture and
-> must not appear in [`architecture.md`](architecture.md), in
-> [`requirements-mapping.md`](requirements-mapping.md), or in the architecture
-> diagram. The agreed list in the [README](../README.md) is authoritative.
+> **Scope note.** Assessment 1 referred to services from other cloud providers,
+> and to AWS services that BookHaven does not use, purely for comparison. Those
+> services are **not** part of the BookHaven architecture and must not appear in
+> [`architecture.md`](architecture.md), in
+> [`requirements-mapping.md`](requirements-mapping.md), or in the diagrams. The
+> service list in [`architecture.md`](architecture.md) is authoritative.
 
 ---
 
 ## 5. Ethical, accessibility and sustainability considerations
 
-Earlier work in the unit examined diversity, equity and inclusion (DEI) in cloud
-computing, and identified four themes. They are recorded here because they apply
-to BookHaven as an online shop serving the general public, even though the
-current stage of the project is architectural rather than application-level.
+Assessment 1 examined diversity, equity and inclusion (DEI) in cloud computing
+and identified four themes. They are recorded here because they apply to
+BookHaven as an online shop serving the general public, even though Assessment 2
+is architectural rather than application-level.
+
+The specific tools named in Assessment 1 belonged to a different cloud provider
+and are not used by BookHaven. What transfers is the **principles**, not the
+products.
 
 | Theme | What it meant in the earlier work | How it applies to BookHaven |
 |---|---|---|
-| **Fairness** | Tools that detect bias in automated decisions | Any future recommendation or personalisation feature should be checked for bias before it influences what customers are shown |
-| **Accessibility** | Assistive and multilingual technology supporting users who are deaf, hard of hearing or visually impaired | The bookshop interface should be usable with assistive technology; this is an application-design requirement to be carried into the build stage |
+| **Fairness** | Tools that detect and document bias in AI models across demographic groups | Any future recommendation or personalisation feature should be checked for bias before it influences what customers are shown |
+| **Accessibility** | Assistive and multilingual technology supporting users who are deaf, hard of hearing or visually impaired | The bookshop interface should be usable with assistive technology; an application-design requirement, not yet addressed |
 | **Inclusiveness** | Broad language support preventing exclusion of diverse users | Content and interface language should not assume a single user group |
 | **Trust and transparency** | Documenting how automated systems behave | Being clear with customers about what data is collected and how it is used |
 
@@ -101,9 +131,9 @@ to BookHaven's design through cost optimisation: **EC2 Auto Scaling** removes
 instances when demand falls, so the architecture consumes compute in proportion
 to actual demand rather than running permanently at peak capacity.
 
-> **Scope note.** These are considerations to carry into the application build
-> stage. They are recorded, not yet designed for, and no service has been added
-> to the architecture on their account.
+> **Scope note.** These are considerations recorded for the application layer.
+> They are not yet designed for, and no service has been added to the
+> architecture on their account.
 
 ---
 

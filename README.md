@@ -19,25 +19,34 @@ the unit are recorded in [`docs/unit-context.md`](docs/unit-context.md).
 
 ## Project purpose
 
-BookHaven is an online bookshop serving two groups of users:
+BookHaven is an online bookstore. Its web application manages the book
+catalogue, customer orders and inventory, and was hosted on a **single
+on-premises server**. During Black Friday and Boxing Day, large increases in
+users made the application slow or unavailable, causing abandoned carts and lost
+sales.
 
-- **Customers**, who browse the catalogue, search for titles and place orders.
-- **Staff**, who manage stock, update the catalogue and process orders.
+This project migrates hosting to AWS and replaces the single-server dependency
+with a distributed architecture: multiple application instances behind an
+Application Load Balancer, spread across two Availability Zones, with Auto
+Scaling and a private managed database.
 
-The purpose of this project is to design and document an AWS architecture that
-supports these users while meeting the assessment criteria for functional
-design, load balancing, scalability, high availability, security, cost
-optimisation and high performance.
+The design meets the assessment criteria for functional design, load balancing,
+scalability, high availability, security, cost optimisation and high
+performance, and was built and tested as a proof of concept in the
+**ap-southeast-2 (Sydney)** Region.
 
-The current stage of work covers:
+This repository contains:
 
-1. Agreeing the architecture as a team.
-2. Documenting that architecture and mapping it to the assessment requirements.
-3. Producing an architecture diagram in Figma.
-4. Establishing a shared way of working for a remote team.
+1. The architecture as designed and as deployed.
+2. A mapping of the architecture to each assessment requirement.
+3. The implementation evidence from the deployed proof of concept.
+4. Architecture diagrams produced in Figma.
+5. The team's way of working.
 
-Building the application and provisioning AWS infrastructure are **out of scope
-for this stage** and will follow once the design is agreed and reviewed.
+**Target design versus proof of concept.** Route 53 and RDS Multi-AZ are part of
+the target design but were not deployed — no domain was registered, and Multi-AZ
+is unavailable on the AWS Free plan. Every difference is listed in
+[`docs/architecture.md`](docs/architecture.md).
 
 ---
 
@@ -49,10 +58,10 @@ bookhaven/
 ├── CONTRIBUTING.md                  How to contribute changes
 ├── .gitignore                       Files excluded from version control
 ├── docs/
-│   ├── architecture.md              The agreed architecture, explained
+│   ├── architecture.md              The architecture, as designed and deployed
 │   ├── requirements-mapping.md      Architecture mapped to assessment criteria
-│   ├── team-workflow.md             How the remote team coordinates
-│   ├── unit-context.md              Unit details and background from the unit
+│   ├── implementation-evidence.md   What was deployed and what testing showed
+│   ├── unit-context.md              Unit details and background from Assessment 1
 │   └── references.md                Harvard reference list for cited sources
 ├── diagrams/
 │   └── README.md                    Where exported Figma diagrams are stored
@@ -78,28 +87,35 @@ naming and export conventions.
 
 ---
 
-## AWS services currently agreed
-
-The team has agreed the following services. Any addition to this list must be
-proposed in an issue and agreed by the team before it appears in the
-documentation or the diagram.
+## AWS services used
 
 | Service | Role in the architecture |
 |---|---|
-| **Route 53** | Public DNS for the BookHaven domain; resolves user requests to the CloudFront distribution. |
-| **CloudFront** | Content delivery network at the edge; caches static content close to users and forwards dynamic requests to the load balancer. |
-| **Application Load Balancer** | Distributes incoming application traffic across healthy EC2 instances in both Availability Zones. |
-| **EC2 Auto Scaling** | Runs the application tier and adjusts the number of instances in response to demand. |
-| **Amazon RDS Multi-AZ** | Managed relational database holding catalogue, customer and order data, with a standby in a second Availability Zone. |
-| **VPC and subnets** | Private network boundary, divided into public and private subnets across two Availability Zones. |
-| **Security Groups** | Instance-level firewalls controlling traffic between each tier. |
-| **IAM** | Identity and access management for users, roles and service permissions. |
-| **Secrets Manager** | Secure storage and retrieval of database credentials and other secrets. |
-| **CloudWatch** | Metrics, logs and alarms; the source of the scaling signals used by EC2 Auto Scaling. |
+| **Amazon Route 53** | DNS entry point for a custom domain. *Target design only — no domain registered.* |
+| **Amazon CloudFront** | HTTPS at the edge in front of the ALB; caching disabled for dynamic PHP pages. |
+| **Application Load Balancer** | Internet-facing, in two public subnets; forwards to the `BookHaven-WebTG` target group. |
+| **Amazon EC2** | Two `t3.micro` Amazon Linux 2023 servers running Apache and PHP, one per AZ. |
+| **EC2 Auto Scaling** | `BookHaven-WebASG`, 2–4 instances, target tracking at 50% average CPU. |
+| **Amazon RDS for MySQL** | MySQL 8.4 on `db.t4g.micro`, KMS-encrypted, private DB subnet group across both AZs. *Multi-AZ is target design.* |
+| **Amazon VPC** | `BookHaven-vpc` (10.0.0.0/16), two public and two private subnets across two AZs. |
+| **Security Groups** | Traffic chained by tier: internet → ALB → EC2 → RDS. |
+| **AWS IAM** | `BookHaven-EC2-RDS-Role` instance role; no access keys stored on servers. |
+| **AWS Secrets Manager** | RDS-managed database credential, read at runtime through a private endpoint. |
+| **Amazon CloudWatch** | EC2 metrics and the alarms driving the Auto Scaling policy. |
+| **VPC endpoints** | Secrets Manager interface endpoint and S3 gateway endpoint, used instead of a NAT gateway. |
+| **EC2 Instance Connect Endpoint** | Private administrative SSH access; no bastion host, no public IPs. |
 
-Full detail is in [`docs/architecture.md`](docs/architecture.md). The reasoning
-behind using EC2 (closer to IaaS) for the application tier and managed RDS for
-the database tier is explained in [`docs/unit-context.md`](docs/unit-context.md).
+**Not deployed:** AWS WAF and an ACM certificate on the ALB were left out of the
+proof of concept to control cost, and are recorded as production enhancements.
+
+Full detail is in [`docs/architecture.md`](docs/architecture.md), the
+requirement mapping in
+[`docs/requirements-mapping.md`](docs/requirements-mapping.md), and the
+deployment evidence in
+[`docs/implementation-evidence.md`](docs/implementation-evidence.md). The
+reasoning behind using EC2 (closer to IaaS) for the application tier and managed
+RDS for the database tier is explained in
+[`docs/unit-context.md`](docs/unit-context.md).
 
 ---
 
@@ -128,8 +144,7 @@ contributions from every team member are visible and recorded.
 8. Request a review from at least one other team member.
 9. Merge only after approval.
 
-Detailed guidance is in [`CONTRIBUTING.md`](CONTRIBUTING.md) and
-[`docs/team-workflow.md`](docs/team-workflow.md).
+Detailed guidance is in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ---
 

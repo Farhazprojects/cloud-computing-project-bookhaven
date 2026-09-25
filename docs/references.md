@@ -3,52 +3,40 @@
 Sources cited in the BookHaven documentation, in **Harvard (CQUniversity)
 author–date** style, ordered alphabetically by author.
 
-Add an entry here whenever you cite a source in any document in this repository.
-Keep the list alphabetical, and include the date you viewed the source.
+These are the references used in the assessment reports. Add an entry here
+whenever you cite a source in any document in this repository, keep the list
+alphabetical, and include the date the source was viewed.
 
 ---
 
 ## Reference list
 
-Amazon Web Services 2026a, *Amazon EC2 Auto Scaling*, Amazon Web Services,
-viewed 25 September 2026, <https://docs.aws.amazon.com/autoscaling/ec2/userguide/>.
+Amazon Web Services 2024, *AWS Well-Architected Framework*, Amazon Web Services,
+viewed 10 September 2026,
+<https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html>.
 
-Amazon Web Services 2026b, *Amazon RDS Multi-AZ deployments*, Amazon Web
-Services, viewed 25 September 2026,
-<https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html>.
+Amazon Web Services 2026a, *Amazon RDS Multi-AZ deployments*, Amazon Web
+Services, viewed 10 September 2026,
+<https://aws.amazon.com/rds/features/multi-az/>.
 
-Amazon Web Services 2026c, *Amazon Route 53 Developer Guide*, Amazon Web
-Services, viewed 25 September 2026,
-<https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/>.
+Amazon Web Services 2026b, *What is AWS Secrets Manager?*, Amazon Web Services,
+viewed 10 September 2026,
+<https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html>.
 
-Amazon Web Services 2026d, *Amazon Virtual Private Cloud User Guide*, Amazon Web
-Services, viewed 25 September 2026, <https://docs.aws.amazon.com/vpc/latest/userguide/>.
+Amazon Web Services 2026c, *Application Load Balancer*, Elastic Load Balancing,
+Amazon Web Services, viewed 10 September 2026,
+<https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html>.
 
-Amazon Web Services 2026e, *AWS Identity and Access Management User Guide*,
-Amazon Web Services, viewed 25 September 2026,
-<https://docs.aws.amazon.com/IAM/latest/UserGuide/>.
+Amazon Web Services 2026d, *Amazon EC2 Auto Scaling*, Amazon Web Services,
+viewed 10 September 2026,
+<https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html>.
 
-Amazon Web Services 2026f, *AWS Secrets Manager User Guide*, Amazon Web
-Services, viewed 25 September 2026,
-<https://docs.aws.amazon.com/secretsmanager/latest/userguide/>.
+Amazon Web Services 2026e, *Amazon CloudFront*, Amazon Web Services, viewed
+10 September 2026,
+<https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html>.
 
-Amazon Web Services 2026g, *Amazon CloudFront Developer Guide*, Amazon Web
-Services, viewed 25 September 2026,
-<https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/>.
-
-Amazon Web Services 2026h, *Amazon CloudWatch User Guide*, Amazon Web Services,
-viewed 25 September 2026, <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/>.
-
-Amazon Web Services 2026i, *Application Load Balancers*, Amazon Web Services,
-viewed 25 September 2026,
-<https://docs.aws.amazon.com/elasticloadbalancing/latest/application/>.
-
-Amazon Web Services 2026j, *Security groups for your VPC*, Amazon Web Services,
-viewed 25 September 2026,
-<https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html>.
-
-CQUniversity 2026, *COIT20260 Cloud Computing and Internet of Things for Smart
-Applications*, CQUniversity, Sydney.
+CQUniversity 2026, *Cloud Architecture and Design Patterns*, COIT20260 lecture
+material, CQUniversity Australia.
 
 ---
 
@@ -60,3 +48,9 @@ Applications*, CQUniversity, Sydney.
 - **Use the lettered suffixes** (`2026a`, `2026b`) when citing several sources by
   the same author in the same year, and cite them that way in the text.
 - Unit materials are cited as CQUniversity with the year, as above.
+
+**In-text citation**
+
+```
+Auto Scaling adjusts capacity in response to demand (Amazon Web Services 2026d).
+```
